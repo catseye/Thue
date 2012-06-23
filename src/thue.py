@@ -1,11 +1,16 @@
+#!/usr/bin/env python
+# encoding: UTF-8
+#
 # Thue interpreter in Python <www.python.org>
 # FvdP release 1.0 (2000 oct 8)
+# Cat's Eye Technologies revision 2010.1218
 #
 # tested with Python 1.5.1, Python 1.5.2.
 #
 # the Thue language is a creation of John Colagioia <jcolag@bigfoot.com>;
-# Frédéric van der Plancke <frederic.vdplancke@writeme.com> wrote this
-# interpreter.
+# FrÃ©dÃ©ric van der Plancke <frederic.vdplancke@writeme.com> wrote this
+# interpreter. Chris Pressey added only a hash-bang line and changed only
+# the file encoding to UTF-8 to placate Python 2.5.5.
 #
 # This code is public domain, but please give due credit
 # (this includes not crediting me for code _you_ have written)

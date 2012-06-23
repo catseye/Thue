@@ -3,6 +3,12 @@
  * Recent Changes:
  *
  * $Log: thue.c,v $
+ * Revision 1.5  2010/12/18           Chris Pressey
+ * Fix off-by-one error in sort routine, reported by
+ * Nathan Thern.  Fix another off-by-one error in
+ * random number generation.  Modernize: use rand()
+ * and rename getline() to avoid name conflict.
+ *
  * Revision 1.4  2000/09/02 16:46:29  John Colagioia
  * Trivial bugfix.
  *
@@ -31,12 +37,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <mem.h>
 #include <time.h>
 
 #define	SEP	"::="
 
-	char	* getline	(FILE * infile);
+	char	* get_line	(FILE * infile);
 
 struct rule
 	{
@@ -46,8 +51,8 @@ struct rule
 
 int	ruleidx = 0,
 	debug = 0;
-char	dataspace[16384],
-	tempspace[16384];
+char	*dataspace,
+	*tempspace;
 
 int main (int argc, char *argv[])
 {
@@ -64,7 +69,13 @@ int main (int argc, char *argv[])
 	 rnum[64];
  FILE	*infile;
 
- randomize ();
+ srand(time(0));
+ dataspace = malloc(16384);
+ tempspace = malloc(16384);
+ if (dataspace == NULL || tempspace == NULL) {
+	fprintf (stderr, "Could not allocate sufficient working memory\n");
+	exit(1);
+ }
  target[0] = dataspace;
  memset (rulebase, 0, sizeof (rulebase));
  memset (dataspace, 0, sizeof (dataspace));
@@ -94,7 +105,7 @@ int main (int argc, char *argv[])
  state = 0;
  while (!feof (infile))
 	{
-	 line = getline (infile);
+	 line = get_line (infile);
 	 if (state == 0)
 		{
 		 if (line != NULL && !strlen (line))
@@ -110,7 +121,7 @@ int main (int argc, char *argv[])
 				if (!isspace (*tmp))
 					 flagstate = 1;
 			 if (flagstate)
-				{				
+				{
 				 *c = '\000';
 				 c += strlen (SEP);
 				 strcpy (rulebase[ruleidx].lhs, line);
@@ -159,12 +170,12 @@ int main (int argc, char *argv[])
 
 	 /* Sort the LHS list - Just a bubble sort */
 	 for (i=1;i<j;i++)
-	    for (k=0;k<i;k++)
+	    for (k=1;k<i;k++)
 		if (target[i] < target[k])
 			{
 			 c = target[i];		temp = rnum[i];
 			 target[i] = target[k];	rnum[i] = rnum[k];
-			 target[k] = target[i];	rnum[k] = temp;
+			 target[k] = c;		rnum[k] = temp;
 			}
 
 	 /* Choose rule to apply */
@@ -177,7 +188,7 @@ int main (int argc, char *argv[])
 			i = 1;
 			break;
 		 default:
-			i = random (j - 1) + 1;
+			i = rand() % (j - 1) + 1;
 			break;
 		}
 	 line = target[i];
@@ -196,7 +207,10 @@ int main (int argc, char *argv[])
 		{
  		 i = !strcmp (rulebase[temp].rhs, ":::");
 		 if (i)
-			scanf (" %[^\n]", tempstr);
+                     {
+			fgets (tempstr, sizeof (tempstr), stdin);
+                        tempstr[strlen (tempstr) - 1] = '\0';
+                     }
 		}
 
 	 /* Apply the rule */
@@ -211,18 +225,17 @@ int main (int argc, char *argv[])
  return (0);
 }
 
-char * getline (FILE * infile)
+char * get_line (FILE * infile)
 {
- static	char	 inline[256];
-	char	*eol;
-	int	 c;
+ static	char	 buffer[256];
+	char	*s;
 
- memset (inline, 0, sizeof (inline));
+ memset (buffer, 0, sizeof (buffer));
  /* Get next line from file */
- c = fscanf (infile, "%[^\n]", inline);
- if (c < 0)
+ s = fgets (buffer, sizeof (buffer), infile);
+ if (s == NULL)
 	return (NULL);
- c = fgetc (infile);
+ buffer[strlen (buffer) - 1] = '\0';
  /* Return pointer to string */
- return (inline);
+ return (buffer);
 }
