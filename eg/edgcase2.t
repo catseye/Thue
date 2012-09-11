@@ -1,0 +1,4 @@
+YYY::=...
+ ::=G
+ ::= 
+ZZZZZZZZZZZZ

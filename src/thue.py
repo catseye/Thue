@@ -9,8 +9,10 @@
 #
 # the Thue language is a creation of John Colagioia <jcolag@bigfoot.com>;
 # Frédéric van der Plancke <frederic.vdplancke@writeme.com> wrote this
-# interpreter. Chris Pressey added only a hash-bang line and changed only
-# the file encoding to UTF-8 to placate Python 2.5.5.
+# interpreter. Chris Pressey made only the following changes:
+# - added a hash-bang line
+# - changed the file encoding to UTF-8 (to placate Python 2.5.5)
+# - modernized the `raise` statements (to placate Python 2.7)
 #
 # This code is public domain, but please give due credit
 # (this includes not crediting me for code _you_ have written)
@@ -129,13 +131,13 @@ def parse_program(program, sep = "::=", output_sep = "~", **options):
             #if line[:1] == "#":   #comment !
             #    continue
             if is_space(line): continue
-            raise 'Malformed production: "%s"' % line
+            raise Exception('Malformed production: "%s"' % line)
         else:
             lhs = line[ : isep]
             rhs = line[isep + len(sep) : ]
             if is_space(lhs):
                 if not is_space(rhs):
-                    raise 'Malformed production: "%s"' % line
+                    raise Exception('Malformed production: "%s"' % line)
                 state = 1
             else:
                 output = None
