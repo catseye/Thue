@@ -12,11 +12,14 @@ John's implementation of the language, in C, is in the file `thue.c` in the
 `src` directory, and can, for all intents and purposes, be considered the
 reference implementation.
 
-There is also an implementation in Python, by Frédéric van der Plancke,
-in `thue.py` in `src`.
+In the `src` directory, there are also two other implementation of Thue:
+
+*   `thue.py`, in Python, written by Frédéric van der Plancke
+*   `thue.rb`, in Ruby, written by Chris Pressey
 
 There is an assortment of example Thue programs in the `eg` directory; all
-were written by John, except for `add_bin.t`, which was written by Frédéric.
+were written by John, except for `add_bin.t`, which was written by Frédéric,
+and the `edgcase?.t` ones, which were written by Chris.
 
 More information on Thue can be found on the esolangs.org wiki
 [entry for Thue](http://esolangs.org/wiki/Thue).
@@ -47,5 +50,8 @@ putting something into the public domain does not take away one's moral
 rights to proper credit, so this isn't very much (if at all) different from
 just being in the public domain.
 
-I, Chris Pressey, hereby place the contents of this README into the public
-domain, for whatever that's worth.
+I, Chris Pressey, hereby place my implementation in Ruby, my example Thue
+programs in `eg`, and the contents of this README, into the public domain,
+under the Creative Commons [CC0 1.0 Public Domain Dedication][].
+
+[CC0 1.0 Public Domain Dedication]: http://creativecommons.org/publicdomain/zero/1.0/
