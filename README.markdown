@@ -17,9 +17,13 @@ In the `src` directory, there are also two other implementation of Thue:
 *   `thue.py`, in Python, written by Frédéric van der Plancke
 *   `thue.rb`, in Ruby, written by Chris Pressey
 
-There is an assortment of example Thue programs in the `eg` directory; all
-were written by John, except for `add_bin.t`, which was written by Frédéric,
-and the `edgcase?.t` ones, which were written by Chris.
+There is an assortment of example Thue programs in the `eg` directory.  The
+credits for these are as follows:
+
+*   `add_bin.t`: Frédéric van der Plancke
+*   `edgcase?.t`: Chris Pressey
+*   `truth-machine.t`: Keymaker
+*   all others: John Colagioia
 
 More information on Thue can be found on the esolangs.org wiki
 [entry for Thue](http://esolangs.org/wiki/Thue).
@@ -54,4 +58,10 @@ I, Chris Pressey, hereby place my implementation in Ruby, my example Thue
 programs in `eg`, and the contents of this README, into the public domain,
 under the Creative Commons [CC0 1.0 Public Domain Dedication][].
 
+The following example files were taken from the [esolangs.org wiki][], and
+are thus also under the CC0 1.0 Public Domain Dedication:
+
+*    `truth-machine.t`
+
 [CC0 1.0 Public Domain Dedication]: http://creativecommons.org/publicdomain/zero/1.0/
+[esolangs.org wiki]: http://esolangs.org/
