@@ -10,7 +10,8 @@ The specification can be found in the file `thue.txt` in the `doc` directory.
 
 John's implementation of the language, in C, is in the file `thue.c` in the
 `src` directory, and can, for all intents and purposes, be considered the
-reference implementation.
+reference implementation.  There is no `Makefile` but an executable can be
+built by running the included `build.sh` script, which is trivial.
 
 In the `src` directory, there are also two other implementation of Thue:
 
