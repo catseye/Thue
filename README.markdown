@@ -24,6 +24,7 @@ credits for these are as follows:
 *   `add_bin.t`: Frédéric van der Plancke
 *   `edgcase?.t`: Chris Pressey
 *   `truth-machine.t`: Keymaker
+*   `quine.t`: TSUYUSATO Kitsune
 *   all others: John Colagioia
 
 More information on Thue can be found on the esolangs.org wiki
